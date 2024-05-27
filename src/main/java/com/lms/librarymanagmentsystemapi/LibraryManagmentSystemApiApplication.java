@@ -17,7 +17,4 @@ public class LibraryManagmentSystemApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(LibraryManagmentSystemApiApplication.class, args);
     }
-
-
-
 }

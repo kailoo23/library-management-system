@@ -2,6 +2,7 @@ package com.lms.librarymanagmentsystemapi.controlers;
 
 import com.lms.librarymanagmentsystemapi.entity.Book;
 import com.lms.librarymanagmentsystemapi.entity.Patron;
+import com.lms.librarymanagmentsystemapi.services.BorrowingService;
 import com.lms.librarymanagmentsystemapi.services.PatronService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PatronController {
 
+    private final BorrowingService boService;
     private final PatronService service;
 
     @GetMapping("/books")
@@ -40,10 +42,13 @@ public class PatronController {
         service.editPatreonByID(id,patron);
         return patron;
     }
-    @PutMapping("/patron/borrow/{paid}/{bid}")
-    public Patron borrowBookByID(@PathVariable("paid") Long paid,@PathVariable("bid") Long bid, @RequestBody Patron patron) {
-     //   service.editPatreonByID(paid,patron);
-        return patron;
+    @PostMapping("/patron/borrow/{paid}/{bid}")
+    public void borrowBookByID(@PathVariable("paid") Long paid,@PathVariable("bid") Long bid) {
+        boService.addRecord(paid,bid);
+    }
+    @PutMapping("/patron/return/{bid}")
+    public void returnBook(@PathVariable("bid") Long bid) {
+        boService.returnBook(bid);
     }
 
 
