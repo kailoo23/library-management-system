@@ -19,7 +19,7 @@ public class BorrowRecord {
     @Column(name="reid")
     private Long ID;
 
-    private String Title;
+    private String title;
     private String borrower;
     private String borrowDate;
     private String returnDate;
